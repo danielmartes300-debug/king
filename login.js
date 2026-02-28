@@ -8,11 +8,18 @@ form.addEventListener("submit", function(e){
     e.preventDefault(); // IMPORTANTE
 
     intentos++;
-    console.log("Intento:", intentos); // para verificar en consola
+    console.log("Intento:", intentos);
+
+    const usuarioInput = document.getElementById("usuario");
+    const passwordInput = document.getElementById("password");
 
     if (intentos <= 3) {
         mensaje.style.color = "#c0392b";
-        mensaje.textContent = "Contraseña incorrecta, intenta de nuevo";
+        mensaje.textContent = "Usuario o contraseña incorrectos";
+
+        // Borrar campos
+        usuarioInput.value = "";
+        passwordInput.value = "";
     } 
     
     if (intentos === 4) {
