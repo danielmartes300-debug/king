@@ -104,3 +104,23 @@ button{
     padding:8px 0;
     color:red;
 }
+
+/* ========================= */
+/* LOADER AGREGADO */
+/* ========================= */
+
+.loader{
+    display:none;
+    margin:20px auto 0 auto;
+    border:4px solid #f3f3f3;
+    border-top:4px solid #0b3d91;
+    border-radius:50%;
+    width:35px;
+    height:35px;
+    animation:girar 1s linear infinite;
+}
+
+@keyframes girar{
+    0%{ transform:rotate(0deg); }
+    100%{ transform:rotate(360deg); }
+}
